@@ -4,9 +4,20 @@ import Inicio from '../views/ClientesView.vue'
 const routes = [
     {
         path: '/',
-        name: 'home',
-        component: Inicio
+        name: 'inicio',
+        component: Inicio,
+        props: {
+            title: 'Listado de clientes'
+        }
     },
+    {
+        path: '/agregar-cliente',
+        name: 'agregar-cliente',
+        component: () => import('../views/NuevoClienteView.vue'),
+        props: {
+            title: 'Nuevo cliente'
+        }
+    }
 ]
 
 const router = createRouter({

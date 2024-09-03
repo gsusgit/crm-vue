@@ -14,8 +14,8 @@
     <Heading>
       {{ title }}
     </Heading>
-    <RouterLink :to="'agregar-cliente'">
-      Nuevo cliente
+    <RouterLink :to="'inicio'">
+      Volver
     </RouterLink>
   </div>
 </template>
