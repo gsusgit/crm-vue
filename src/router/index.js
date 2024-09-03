@@ -1,9 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import Inicio from '../views/ClientesView.vue'
 
 const routes = [
     {
-
-    }
+        path: '/',
+        name: 'home',
+        component: Inicio
+    },
 ]
 
 const router = createRouter({
