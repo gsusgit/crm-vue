@@ -9,6 +9,15 @@
     }
   })
 
+  const formData = {
+    nombre: 'Jesús',
+    apellido: 'Fernández',
+    email: 'jesus.fernandez@gesthispania.com',
+    telefono: '615810191',
+    empresa: 'Gesthispania',
+    puesto: 'Frontend Developer'
+  }
+
   const handleSubmit = (data) => {
     console.log(data)
   }
@@ -38,6 +47,7 @@
             validation="required"
             :validation-messages="{ required: 'El nombre es obligatorio' }"
             name="nombre"
+            :value="formData.nombre"
         />
         <FormKit
             type="text"
@@ -46,6 +56,7 @@
             validation="required"
             :validation-messages="{ required: 'El apellido es obligatorio' }"
             name="apellido"
+            :value="formData.apellido"
         />
         <FormKit
             type="email"
@@ -54,6 +65,7 @@
             validation="required|email"
             :validation-messages="{ required: 'El email es obligatorio', email: 'Escribe un email válido' }"
             name="email"
+            :value="formData.email"
         />
         <FormKit
             type="text"
@@ -62,18 +74,21 @@
             validation="+matches:/^[6-9]{3}[0-9]{3}[0-9]{3}/"
             :validation-messages="{ matches: 'Escribe un teléfono correcto' }"
             name="telefono"
+            :value="formData.telefono"
         />
         <FormKit
             type="text"
             label="Empresa"
             placeholder="Empresa"
             name="empresa"
+            :value="formData.empresa"
         />
         <FormKit
             type="text"
             label="Puesto"
             placeholder="Puesto"
             name="puesto"
+            :value="formData.puesto"
         />
       </FormKit>
     </div>
