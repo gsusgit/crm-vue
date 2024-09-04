@@ -7,6 +7,7 @@
   import Spinner from '../components/ui/Spinner.vue'
   import Alert from '../components/ui/Alert.vue'
   import Cliente from '../components/templates/Cliente.vue'
+  import Modal from '../components/ui/Modal.vue'
 
   defineProps({
     title: {
@@ -23,6 +24,11 @@
     page: ''
   })
   const showAlert = ref(false)
+  const modal = ref({
+    message: 'Confirmar borrado de cliente',
+    show: false,
+    id: ''
+  })
 
   const existenClientes = computed(() => {
     return clientes.value.length > 0
@@ -81,35 +87,42 @@
   }
 
   const borrarCliente = (id) => {
-    if (confirm('¿Estás seguro de que quieres borrrar el cliente?')) {
-      loading.value = true
-      ClienteService.borrarCliente(id)
-          .then(() => {
-            obtenerClientes()
-            alert.value ={
-              type: 'success',
-              message: 'Cliente eliminado de la plataforma con éxito.',
-              link: '',
-              page: ''
-            }
-            showAlert.value = true
-          })
-          .catch(() => {
-            alert.value ={
-              type: 'error',
-              message: 'Ocurrió un error al intentar borrar el cliente, inténtelo de nuevo más tarde.',
-              link: '',
-              page: ''
-            }
-            showAlert.value = true
-          })
-    }
+    modal.value.show = true
+    modal.value.id = id
+  }
 
+  const confimarBorradoCliente = () => {
+    modal.value.show = false
+    loading.value = true
+    ClienteService.borrarCliente(modal.value.id)
+        .then(() => {
+          obtenerClientes()
+          alert.value ={
+            type: 'success',
+            message: 'Cliente eliminado de la plataforma con éxito.',
+            link: '',
+            page: ''
+          }
+          showAlert.value = true
+        })
+        .catch(() => {
+          alert.value ={
+            type: 'error',
+            message: 'Ocurrió un error al intentar borrar el cliente, inténtelo de nuevo más tarde.',
+            link: '',
+            page: ''
+          }
+          showAlert.value = true
+        })
   }
 
 </script>
 
 <template>
+  <Modal
+      :modal="modal"
+      @confirmar-borrado-cliente="confimarBorradoCliente"
+  />
   <Spinner v-if="loading"/>
   <div v-else class="flex justify-between">
     <Heading>

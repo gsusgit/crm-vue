@@ -9,26 +9,6 @@
       "empresa": "Gesthispania",
       "puesto": "Backend Developer",
       "estado": true
-    },
-    {
-      "id": "8992",
-      "nombre": "Francisco",
-      "apellido": "Borrego",
-      "email": "francisco.borrego@gesthispania.com",
-      "telefono": "623457789",
-      "empresa": "Gesthispania",
-      "puesto": "Analist",
-      "estado": false
-    },
-    {
-      "id": "7146",
-      "nombre": "Estela",
-      "apellido": "Muñoz",
-      "email": "estela.munoz@gesthispania.com",
-      "telefono": "654789887",
-      "empresa": "Gesthispania",
-      "puesto": "Fullstack Developer",
-      "estado": true
     }
   ]
 }
