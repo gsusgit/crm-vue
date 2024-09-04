@@ -116,6 +116,34 @@
         })
   }
 
+  const resetearClientes = () => {
+    loading.value = true
+    clientes.value.forEach(cliente => {
+      ClienteService.borrarCliente(cliente.id)
+          .then()
+          .catch(() => {
+            alert.value ={
+              type: 'error',
+              message: 'Ocurrió un error al intentar borrar clientes, inténtelo de nuevo más tarde.',
+              link: '',
+              page: ''
+            }
+            showAlert.value = true
+          })
+          .finally(() => {
+            clientes.value = []
+            loading.value = false
+            alert.value ={
+              type: 'success',
+              message: 'Clientes eliminados de la plataforma con éxito.',
+              link: '',
+              page: ''
+            }
+            showAlert.value = true
+          })
+    });
+  }
+
 </script>
 
 <template>
@@ -161,6 +189,18 @@
           </table>
         </div>
       </div>
+    </div>
+    <div v-if="existenClientes && !loading" class="flow-root mx-auto mt-5">
+      <button
+          type="button"
+          class="text-white bg-red-600 hover:bg-red-800 focus:ring-4
+              focus:outline-none focus:ring-red-300 dark:focus:ring-red-800
+              font-medium rounded-lg text-sm inline-flex items-center px-5
+              py-2.5 text-center"
+          @click="resetearClientes"
+      >
+        Borrar clientes
+      </button>
     </div>
   </div>
 </template>

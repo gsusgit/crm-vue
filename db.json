@@ -1,14 +1,3 @@
 {
-  "clientes": [
-    {
-      "id": "24f0",
-      "nombre": "Luis Miguel",
-      "apellido": "Fernández",
-      "email": "luis.fernandez@gesthispania.com",
-      "telefono": "666666666",
-      "empresa": "Gesthispania",
-      "puesto": "Backend Developer",
-      "estado": true
-    }
-  ]
+  "clientes": []
 }
