@@ -13,7 +13,10 @@
     }
   })
 
-  defineEmits(['actualizar-estado'])
+  defineEmits([
+      'actualizar-estado',
+      'borrar-cliente'
+  ])
 
   const estadoCliente = computed(() => {
     return props.cliente.estado
@@ -43,11 +46,12 @@
     </td>
     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 ">
       <RouterLink
-          to="/"
+          :to="{ name: 'editar-cliente', params: { id: cliente.id } }"
           class="text-teal-600 hover:text-teal-900 mr-5"
       >Editar</RouterLink>
       <button
         class="text-red-600 hover:text-red-900"
+        @click="$emit('borrar-cliente', cliente.id)"
       >Eliminar</button>
     </td>
   </tr>

@@ -31,6 +31,10 @@
   onMounted(() => {
     loading.value = true
     showAlert.value = false
+    obtenerClientes()
+  })
+
+  const obtenerClientes = () => {
     setTimeout(async () => {
       ClienteService.obtenerClientes()
           .then(({ data }) => {
@@ -57,7 +61,7 @@
           })
           .finally(() => loading.value = false)
     }, 1500)
-  })
+  }
 
   const actualizarEstado = ({id, estado}) => {
     ClienteService.cambiarEstado(id, {estado: !estado})
@@ -65,7 +69,42 @@
           const i = clientes.value.findIndex(cliente => cliente.id === id)
           clientes.value[i].estado = !estado
         })
-        .catch(error => console.log(error))
+        .catch(() => {
+          alert.value ={
+            type: 'error',
+            message: 'Ocurrió un error al intentar actualizar el estado del cliente, inténtelo de nuevo más tarde.',
+            link: '',
+            page: ''
+          }
+          showAlert.value = true
+        })
+  }
+
+  const borrarCliente = (id) => {
+    if (confirm('¿Estás seguro de que quieres borrrar el cliente?')) {
+      loading.value = true
+      ClienteService.borrarCliente(id)
+          .then(() => {
+            obtenerClientes()
+            alert.value ={
+              type: 'success',
+              message: 'Cliente eliminado de la plataforma con éxito.',
+              link: '',
+              page: ''
+            }
+            showAlert.value = true
+          })
+          .catch(() => {
+            alert.value ={
+              type: 'error',
+              message: 'Ocurrió un error al intentar borrar el cliente, inténtelo de nuevo más tarde.',
+              link: '',
+              page: ''
+            }
+            showAlert.value = true
+          })
+    }
+
   }
 
 </script>
@@ -82,10 +121,10 @@
   </div>
   <div class="mt-4">
     <Alert
-        v-if="showAlert"
+        v-if="showAlert && !loading"
         :alert="alert"
     />
-    <div v-if="existenClientes" class="flow-root mx-auto  mt-10 p-5 bg-white shadow">
+    <div v-if="existenClientes && !loading" class="flow-root mx-auto  mt-10 p-5 bg-white shadow">
       <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="min-w-full py-2 align-middle sm:px-6 lg:px-8">
           <table class="min-w-full divide-y divide-gray-300">
@@ -103,6 +142,7 @@
                   :cliente="cliente"
                   :key="cliente.id"
                   @actualizar-estado="actualizarEstado"
+                  @borrar-cliente="borrarCliente"
               />
             </tbody>
           </table>

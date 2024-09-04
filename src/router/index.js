@@ -17,6 +17,14 @@ const routes = [
         props: {
             title: 'Nuevo cliente'
         }
+    },
+    {
+        path: '/editar-cliente/:id',
+        name: 'editar-cliente',
+        component: () => import('../views/EditarClienteView.vue'),
+        props: {
+            title: 'Editar cliente'
+        }
     }
 ]
 
