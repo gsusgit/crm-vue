@@ -1,8 +1,8 @@
 <script setup>
   import { FormKit } from '@formkit/vue'
-  import axios from 'axios'
   import { useRouter } from 'vue-router'
   import { ref } from 'vue'
+  import ClienteService from '../services/ClienteService.js'
   import RouterLink from '../components/ui/RouterLink.vue'
   import Heading from '../components/ui/Heading.vue'
   import Alert from '../components/ui/Alert.vue'
@@ -24,12 +24,12 @@
   const showAlert = ref(false)
 
   const formData = {
-    nombre: 'Jesús',
-    apellido: 'Fernández',
-    email: 'jesus.fernandez@gesthispania.com',
-    telefono: '615810191',
-    empresa: 'Gesthispania',
-    puesto: 'Frontend Developer'
+    nombre: '',
+    apellido: '',
+    email: '',
+    telefono: '',
+    empresa: '',
+    puesto: ''
   }
 
   const router = useRouter()
@@ -40,7 +40,7 @@
     showAlert.value = false
     loading.value = true
     try {
-      const { data } = await axios('http://localhost:4000/clientes')
+      const { data } = await ClienteService.obtenerClientes()
       if (data.length > 0) {
         clientes.value = data
         const emailExists = clientes.value.find(cliente => cliente.email === form.email)
@@ -59,7 +59,10 @@
           return
         }
       }
-      await axios.post('http://localhost:4000/clientes', form)
+      await ClienteService.nuevoCliente({
+        ...form,
+        estado: true
+      })
       alert.value = {
         type: 'success',
         title: 'Cliente añadido',

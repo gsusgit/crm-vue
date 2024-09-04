@@ -1,11 +1,12 @@
 <script setup>
 
-import { computed, onMounted, ref } from 'vue'
-  import axios from 'axios'
+  import { computed, onMounted, ref } from 'vue'
+  import ClienteService from '../services/ClienteService.js'
   import RouterLink from '../components/ui/RouterLink.vue'
   import Heading from '../components/ui/Heading.vue'
   import Spinner from '../components/ui/Spinner.vue'
   import Alert from '../components/ui/Alert.vue'
+  import Cliente from '../components/templates/Cliente.vue'
 
   defineProps({
     title: {
@@ -31,7 +32,7 @@ import { computed, onMounted, ref } from 'vue'
     loading.value = true
     showAlert.value = false
     setTimeout(async () => {
-      axios('http://localhost:4000/clientes')
+      ClienteService.obtenerClientes()
           .then(({ data }) => {
             if (data.length === 0) {
               alert.value = {
@@ -57,6 +58,15 @@ import { computed, onMounted, ref } from 'vue'
           .finally(() => loading.value = false)
     }, 1500)
   })
+
+  const actualizarEstado = ({id, estado}) => {
+    ClienteService.cambiarEstado(id, {estado: !estado})
+        .then(() =>  {
+          const i = clientes.value.findIndex(cliente => cliente.id === id)
+          clientes.value[i].estado = !estado
+        })
+        .catch(error => console.log(error))
+  }
 
 </script>
 
@@ -88,7 +98,12 @@ import { computed, onMounted, ref } from 'vue'
             </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white">
-
+              <Cliente
+                  v-for="cliente in clientes"
+                  :cliente="cliente"
+                  :key="cliente.id"
+                  @actualizar-estado="actualizarEstado"
+              />
             </tbody>
           </table>
         </div>

@@ -7,7 +7,48 @@
       "email": "jesus.fernandez@gesthispania.com",
       "telefono": "615810191",
       "empresa": "Gesthispania",
-      "puesto": "Frontend Developer"
+      "puesto": "Frontend Developer",
+      "estado": true
+    },
+    {
+      "id": "24f0",
+      "nombre": "Luis Miguel",
+      "apellido": "Fernández",
+      "email": "luis.fernandez@gesthispania.com",
+      "telefono": "666666666",
+      "empresa": "Gesthispania",
+      "puesto": "Backend Developer",
+      "estado": true
+    },
+    {
+      "id": "8992",
+      "nombre": "Fran",
+      "apellido": "Borrego",
+      "email": "francisco.borrego@gesthispania.com",
+      "telefono": "623457789",
+      "empresa": "Gesthispania",
+      "puesto": "Analist",
+      "estado": false
+    },
+    {
+      "id": "191f",
+      "nombre": "Leti",
+      "apellido": "Capelo",
+      "email": "leti.capelo@gesthispania.com",
+      "telefono": "645781245",
+      "empresa": "Meka",
+      "puesto": "Product Designer",
+      "estado": true
+    },
+    {
+      "id": "82eb",
+      "nombre": "Estela",
+      "apellido": "Muñoz",
+      "email": "estela.munoz@gesthispania.com",
+      "telefono": "655998874",
+      "empresa": "Gesthispania",
+      "puesto": "Backend Developer",
+      "estado": true
     }
   ]
 }
