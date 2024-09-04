@@ -1,6 +1,6 @@
 <script setup>
 
-  import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
   import ClienteService from '../services/ClienteService.js'
   import RouterLink from '../components/ui/RouterLink.vue'
   import Heading from '../components/ui/Heading.vue'
@@ -27,14 +27,23 @@
   const modal = ref({
     message: 'Confirmar borrado de cliente',
     show: false,
-    id: ''
+    id: '',
+    removeAll: false
   })
 
   const existenClientes = computed(() => {
     return clientes.value.length > 0
   })
 
+  watch(clientes, () => {
+    localStorage.setItem('crmvue', JSON.stringify(clientes.value))
+  })
+
   onMounted(() => {
+    const storage = localStorage.getItem('crmvue')
+    if (storage) {
+      clientes.value = JSON.parse(storage)
+    }
     loading.value = true
     showAlert.value = false
     obtenerClientes()
@@ -52,6 +61,7 @@
                 page: ''
               }
               showAlert.value = true
+              clientes.value = []
             } else {
               clientes.value = data
             }
@@ -89,6 +99,7 @@
   const borrarCliente = (id) => {
     modal.value.show = true
     modal.value.id = id
+    modal.value.removeAll = false
   }
 
   const confimarBorradoCliente = () => {
@@ -96,7 +107,6 @@
     loading.value = true
     ClienteService.borrarCliente(modal.value.id)
         .then(() => {
-          obtenerClientes()
           alert.value ={
             type: 'success',
             message: 'Cliente eliminado de la plataforma con éxito.',
@@ -104,6 +114,7 @@
             page: ''
           }
           showAlert.value = true
+          obtenerClientes()
         })
         .catch(() => {
           alert.value ={
@@ -116,7 +127,14 @@
         })
   }
 
-  const resetearClientes = () => {
+  const resetearClientes = (id) => {
+    modal.value.show = true
+    modal.value.id = id
+    modal.value.message = 'Confirmar borrado de todos los clientes'
+    modal.value.removeAll = true
+  }
+
+  const confirmarReseteoClientes = () => {
     loading.value = true
     clientes.value.forEach(cliente => {
       ClienteService.borrarCliente(cliente.id)
@@ -150,6 +168,7 @@
   <Modal
       :modal="modal"
       @confirmar-borrado-cliente="confimarBorradoCliente"
+      @confirmar-reseteo-clientes="confirmarReseteoClientes"
   />
   <Spinner v-if="loading"/>
   <div v-else class="flex justify-between">
@@ -190,7 +209,7 @@
         </div>
       </div>
     </div>
-    <div v-if="existenClientes && !loading" class="flow-root mx-auto mt-5">
+    <div v-if="clientes.length > 1 && !loading" class="flow-root mx-auto mt-5">
       <button
           type="button"
           class="text-white bg-red-600 hover:bg-red-800 focus:ring-4
