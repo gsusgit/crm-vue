@@ -7,7 +7,17 @@
       "email": "jesus.fernandez@gesthispania.com",
       "telefono": "666666666",
       "empresa": "Gesthispania",
-      "puesto": "Programador",
+      "puesto": "Frontend Dev",
+      "estado": true
+    },
+    {
+      "id": "5ddf",
+      "nombre": "Luis Miguel",
+      "apellido": "Fernández",
+      "email": "luis.fernandez@gesthispania.com",
+      "telefono": "666777888",
+      "empresa": "Ebraincar",
+      "puesto": "Backend Dev",
       "estado": true
     }
   ]
