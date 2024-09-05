@@ -1,43 +1,13 @@
 {
   "clientes": [
     {
-      "id": "e6fb",
-      "nombre": "Peppinillo",
-      "apellido": "Orejotas",
-      "email": "pepinimalex@gmail.com",
-      "telefono": "654321987",
-      "empresa": "Bote Peppinillo",
-      "puesto": "Jefa",
-      "estado": true
-    },
-    {
-      "id": "2f3b",
-      "nombre": "María",
-      "apellido": "Ramírez",
-      "email": "ppppppopopopopo@gmail.com",
-      "telefono": "666777888",
-      "empresa": "VozVaja",
-      "puesto": "Ganadora",
-      "estado": true
-    },
-    {
-      "id": "3b25",
-      "nombre": "Pepa",
-      "apellido": "Pepa",
-      "email": "pepa@gmail.com",
-      "telefono": "666666999",
-      "empresa": "Pepa",
-      "puesto": "Pepa",
-      "estado": false
-    },
-    {
-      "id": "c399",
-      "nombre": "Siesta",
-      "apellido": "Girl",
-      "email": "mosquitomuerto@gmail.com",
+      "id": "d7b6",
+      "nombre": "Jesus",
+      "apellido": "Fernandez",
+      "email": "jesus.fernandez@gesthispania.com",
       "telefono": "666666666",
-      "empresa": "Desaratizaciones y Desinsectaciones Ratamuerta S.L.",
-      "puesto": "CEO",
+      "empresa": "Gesthispania",
+      "puesto": "Programador",
       "estado": true
     }
   ]

@@ -1,6 +1,6 @@
 <script setup>
 
-import { computed, onMounted, ref, watch } from 'vue'
+  import { computed, onMounted, ref, watch } from 'vue'
   import ClienteService from '../services/ClienteService.js'
   import RouterLink from '../components/ui/RouterLink.vue'
   import Heading from '../components/ui/Heading.vue'
