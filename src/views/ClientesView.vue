@@ -209,7 +209,7 @@
         </div>
       </div>
     </div>
-    <div v-if="clientes.length > 1 && !loading" class="flow-root mx-auto mt-5">
+    <div v-if="clientes.length > 1 && !loading" class="flow-root mx-auto mt-10">
       <button
           type="button"
           class="text-white bg-red-600 hover:bg-red-800 focus:ring-4
